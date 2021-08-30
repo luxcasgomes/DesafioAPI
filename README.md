@@ -5,7 +5,6 @@ API para resolução do desafio Fullstack Zello
 
 -> Clone o repositório 
 -> Acesse o diretório do repositório clonado 
--> Troque a branch para master 
 -> No terminal, execute o comando `mvn clean install` 
 -> Execute o comando `mvn clean spring-boot:run` 
 -> Acesse o endpoint http://localhost:8080/apps/ no postman ou insomnia para criar os apps, pois a aplicação não possui integração com banco de dados 
