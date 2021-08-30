@@ -49,8 +49,8 @@ public class AppsController {
 		Optional<Apps> appFind = appslist.stream().filter(apps -> apps.getId() == id).findFirst();
 
 		if (appFind.isPresent()) {
-			appFind.get().setName("name");
-			appFind.get().setImage("sdadasdasd");
+			appFind.get().setName(name);
+			appFind.get().setImage(image);
 			appFind.get().setIcon(icon);
 			appFind.get().setDev(dev);
 			appFind.get().setTipo(tipo);
