@@ -4,7 +4,6 @@ import java.util.*;
 
 import com.example.desafiopwa.api.model.*;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,7 +12,7 @@ public class AppsController {
 
 	private List<Apps> appslist = new ArrayList<>();
 
-	private Long idcount = 0L;
+	private Integer idcount = 0;
 
 	@GetMapping("/")
 	public Apps apps() {
@@ -22,7 +21,7 @@ public class AppsController {
 	}
 
 	@GetMapping("/{id}")
-	public Apps apps(@PathVariable("id") Long id) {
+	public Apps apps(@PathVariable("id") Integer id) {
 
 		Optional<Apps> appFind = appslist.stream().filter(apps -> apps.getId() == id).findFirst();
 
@@ -41,35 +40,30 @@ public class AppsController {
 		return apps;
 	}
 
-	@PutMapping("/{id}-{image}-{icon}-{name}-{dev}-{tipo}")
-	public Apps appspost( @PathVariable("id") Long id, @PathVariable("name") String name,
-			@PathVariable("image") String image, @PathVariable("icon") String icon, @PathVariable("dev") String dev,
-			@PathVariable("tipo") String tipo, Apps app) {
+	@PutMapping("/{id}")
+	public Apps appspost(@PathVariable("id") Integer id, @RequestBody Apps app) {
 
 		Optional<Apps> appFind = appslist.stream().filter(apps -> apps.getId() == id).findFirst();
-
 		if (appFind.isPresent()) {
-			appFind.get().setName(name);
-			appFind.get().setImage(image);
-			appFind.get().setIcon(icon);
-			appFind.get().setDev(dev);
-			appFind.get().setTipo(tipo);
-			return appFind.get();
+
+
+			appslist.set(id-1, app);
+			if (app.getId() == null){
+				app.setId(id);
+				return app;
+			}
+			return app;
 		}
 
 		return null;
 	}
 
 	@DeleteMapping("/{id}")
-	public Apps appsdelete(@PathVariable("id") Long id) {
+	public Apps appsdelete(@PathVariable("id") Integer id) {
 
 		Optional<Apps> appFind = appslist.stream().filter(apps -> apps.getId() == id).findFirst();
 
 		if (appFind.isPresent()) {
-
-			for (int i = 0; i < appslist.size(); i++) {
-				System.out.print(appslist.get(i).getId() + "\n");
-			}
 
 			for (int i = 0; i < appslist.size(); i++) {
 				Apps p = appslist.get(i);

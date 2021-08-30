@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 public class Apps {
     
-    private Long id;
+    private Integer id;
     private String image;
     private String icon;
     private String name;
